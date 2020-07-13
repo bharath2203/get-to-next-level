@@ -1,10 +1,13 @@
+// Problem: https://codeforces.com/problemset/problem/1208/D
+
 #include <bits/stdc++.h>
 using namespace std;
-const int N = 1e5 + 7;
+const int N = 2e5 + 7;
+const long long INF = 1e14 + 7;
 
-vector <int> tree(4 * N), lazy(4 * N, 0), a(N);
+vector <long long> tree(4 * N), lazy(4 * N, 0), a(N);
 
-int apply(int node, int val) {
+void apply(int node, long long val) {
     tree[node] += val;
     lazy[node] += val;
 }
@@ -29,7 +32,7 @@ void build(int node, int left, int right) {
     }
 }
 
-void update(int node, int left, int right, int l, int r, int val) {
+void update(int node, int left, int right, int l, int r, long long val) {
     if(left > r || right < l) return;
     if(left >= l && right <= r) {
         apply(node, val);
@@ -64,7 +67,7 @@ int main() {
     int n;
     scanf("%d", &n);
     for(int i = 0; i < n; i++) {
-        scanf("%d", &a[i]);
+        scanf("%lld", &a[i]);
     }
     build(1, 0, n - 1);
     vector <int> output(n);
@@ -72,7 +75,7 @@ int main() {
         int cur = query(1, 0, n - 1);
         output[cur] = i + 1;
         // printf("%d\n", cur);
-        update(1, 0, n - 1, cur, cur, N + 1);
+        update(1, 0, n - 1, cur, cur, INF);
         update(1, 0, n - 1, cur + 1, n - 1, -(i + 1));
     }
     for(auto x: output) printf("%d ", x);

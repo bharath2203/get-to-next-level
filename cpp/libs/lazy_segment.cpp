@@ -61,20 +61,5 @@ int query(int node, int left, int right) {
 
 
 int main() {
-    int n;
-    scanf("%d", &n);
-    for(int i = 0; i < n; i++) {
-        scanf("%d", &a[i]);
-    }
-    build(1, 0, n - 1);
-    vector <int> output(n);
-    for(int i = 0; i < n; i++) {
-        int cur = query(1, 0, n - 1);
-        output[cur] = i + 1;
-        // printf("%d\n", cur);
-        update(1, 0, n - 1, cur, cur, N + 1);
-        update(1, 0, n - 1, cur + 1, n - 1, -(i + 1));
-    }
-    for(auto x: output) printf("%d ", x);
-    return 0;
+
 }
